@@ -18,7 +18,7 @@ namespace CPTralix
         , ivadeiva, ivaderet, retderet, conceptoretencion, consecutivoconcepto, claveproductoservicio, valorunitario, importe, descuento, cantidadletra, uuidrel
         , identificador, version, fechapago, monedacpag, tipodecambiocpag, monto, numerooperacion, rfcemisorcuenta, nombrebanco, numerocuentaord, rfcemisorcuentaben, numcuentaben
         , tipocadenapago, certpago, cadenadelpago, sellodelpago, identpag, identdocpago, seriecpag, foliocpag, monedacpagdoc, tipocambiocpag, metododepago, numerodeparcialidad,f03,f04, IdentificadorDelDocumentoPagado, identificaciondpago, serieinvoice, folioscpag, monedascpadgoc, nparcialidades,interiorsaldoanterior,ipagadoisaldoinsoluto, ipagado, isaldoinsoluto,k1,k3,f05,iva,retencion
-        , importeSaldoAnterior, importepago, importesaldoinsoluto, total, subt, ivat, rett, cond, tipoc, seriee, folioe, sfolio, idcomprobante, fecha, tmoneda, Tdoc, IdCliente, RFC, Cliente, Pais, Calle, NoExt, NoInt, Colonia, Localidad, Referencia, Municipio, Estado, CP, FechaPago, cantidad, descripcion, RFCbancoEmisor, BancoEmisor, CuentaPago,Total, identificadorDelPago, formadepagocpag,mmonto,if05,if06;
+        , importeSaldoAnterior, importepago, importesaldoinsoluto, total, subt, ivat, rett, cond, tipoc, seriee, folioe, sfolio, idcomprobante, fecha, tmoneda, Tdoc, IdCliente, RFC, Cliente, Pais, Calle, NoExt, NoInt, Colonia, Localidad, Referencia, Municipio, Estado, CP, FechaPago, cantidad, descripcion, RFCbancoEmisor, BancoEmisor, CuentaPago,Total, identificadorDelPago, formadepagocpag,mmonto,if05,if06, iipagado, totaliva, totalisr;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,7 +32,13 @@ namespace CPTralix
 
         public void iniciaDatos()
         {
-            string folio = "40524";
+            //string folio = "40524";
+            //string folio = "40658";
+            //string folio = "40654";
+            //string folio = "40647";
+            //string folio = "40646";
+            //string folio = "40645";
+            string folio = "40643";
             DataTable td = facLabControler.detalleFacturas(folio);
             string datestring = DateTime.Now.ToString("yyyyMMddHHmmss");
 
@@ -123,6 +129,10 @@ namespace CPTralix
                 DataTable detalleIdent = facLabControler.getDatosCPAGDOC(identificadorDelPago);
                 //string uid = "";
                 decimal importePagos = 0;
+                double ivaa = 0.16;
+                double isrr = 0.04;
+                decimal totalIva = 0;
+                decimal totalIsr = 0;
                 //int contadorPUE = 0;
                 //int contadorPPD = 0;
                 string MetdodoPago = row["MedotoDePago"].ToString();
@@ -153,26 +163,99 @@ namespace CPTralix
                         isaldoinsoluto = rowIdent["ImporteSaldoInsoluto"].ToString();
 
                         DataTable detalleIdentt = facLabControler.getDatosCPAGDOCTRL(identificaciondpago, folioscpag);
-                        foreach (DataRow rowIdentt in detalleIdentt.Rows)
+
+                        if (detalleIdentt.Rows.Count > 0)
                         {
-                            k1 = rowIdentt["K1"].ToString();
-                            k3 = rowIdentt["K3"].ToString();
-                            iva = rowIdentt["IVA"].ToString();
-                            retencion = rowIdentt["RETENCION"].ToString();
+                            foreach (DataRow rowIdentt in detalleIdentt.Rows)
+                            {
+                                k1 = rowIdentt["K1"].ToString();
+                                k3 = rowIdentt["K3"].ToString();
+                                iva = rowIdentt["IVA"].ToString();
+                                retencion = rowIdentt["RETENCION"].ToString();
+                                iipagado = rowIdentt["ORTRXAMT"].ToString();
+                                totalIva = (decimal)(ivaa * Convert.ToDouble(iipagado));
+                                totaliva = totalIva.ToString("F");
+                                totalIsr = (decimal)(isrr * Convert.ToDouble(iipagado));
+                                totalisr = totalIsr.ToString("F");
 
-                            if05 = "CPAG20DOCIMPRET"
-                                + "|" + k1.Trim()
-                                + "|" + k3.Trim()
-                                + "|" + iva.Trim()
-                                + "| \r\n";
+                                if (iva != "")
+                                {
+                                    if05 = "CPAG20DOCIMPRET"
+                                    + "|" + k1.Trim()
+                                    + "|" + k3.Trim()
+                                    + "|" + IdentificadorDelDocumentoPagado.Trim()
+                                    + "|" + "002"
+                                    + "|" + "Tasa"
+                                    + "|" + "0.160000"
+                                    + "|" + totaliva
+                                    //+ "|" + iva.Trim()
+                                    + "|" + iipagado.Trim()
+                                    + "| \r\n";
+                                }
+                                if (retencion !="")
+                                {
+                                    if06 = "CPAG20DOCIMPTRA"
+                                    + "|" + k1.Trim()
+                                    + "|" + k3.Trim()
+                                    + "|" + IdentificadorDelDocumentoPagado.Trim()
+                                    + "|" + "001"
+                                    + "|" + "Tasa"
+                                    + "|" + "0.040000"
+                                    + "|" + totalisr
+                                    //+ "|" + retencion
+                                    + "|" + iipagado.Trim()
+                                    + "| \r\n";
+                                }
 
-                            if06 = "CPAG20DOCIMPTRA"
-                                + "|" + k1.Trim()
-                                + "|" + k3.Trim()
-                                + "|" + retencion
-                                + "| \r\n";
+                                //if05 = "CPAG20DOCIMPRET"
+                                //    + "|" + k1.Trim()
+                                //    + "|" + k3.Trim()
+                                //    + "|" + iva.Trim()
+                                //    + "| \r\n";
 
+                                //if06 = "CPAG20DOCIMPTRA"
+                                //    + "|" + k1.Trim()
+                                //    + "|" + k3.Trim()
+                                //    + "|" + retencion
+                                //    + "| \r\n";
+
+                            }
                         }
+                                f04 += "CPAG20DOC"
+                               + "|" + identificaciondpago
+                               + "|" + IdentificadorDelDocumentoPagado
+                               + "|"
+                               + "|"
+                               + "|" + monedascpadgoc
+                               + "|"
+                               + "|" + nparcialidades
+                               + "|" + interiorsaldoanterior
+                               + "|" + ipagado
+                               + "|" + isaldoinsoluto
+                               + "|" + "02"
+                               + "| \r\n"
+                               + if05
+                               + if06;
+                        //foreach (DataRow rowIdentt in detalleIdentt.Rows)
+                        //{
+                        //    k1 = rowIdentt["K1"].ToString();
+                        //    k3 = rowIdentt["K3"].ToString();
+                        //    iva = rowIdentt["IVA"].ToString();
+                        //    retencion = rowIdentt["RETENCION"].ToString();
+
+                        //    if05 = "CPAG20DOCIMPRET"
+                        //        + "|" + k1.Trim()
+                        //        + "|" + k3.Trim()
+                        //        + "|" + iva.Trim()
+                        //        + "| \r\n";
+
+                        //    if06 = "CPAG20DOCIMPTRA"
+                        //        + "|" + k1.Trim()
+                        //        + "|" + k3.Trim()
+                        //        + "|" + retencion
+                        //        + "| \r\n";
+
+                        //}
 
                         //f04 += "CPAG20DOC"
                         //+ "|" + identificaciondpago
@@ -187,21 +270,7 @@ namespace CPTralix
                         //+ "|" + isaldoinsoluto
                         //+ "|" + "02"
                         //+ "| \r\n";
-                        f04 += "CPAG20DOC"
-                        + "|" + identificaciondpago
-                        + "|" + IdentificadorDelDocumentoPagado
-                        + "|"
-                        + "|"
-                        + "|" + monedascpadgoc
-                        + "|"
-                        + "|" + nparcialidades
-                        + "|" + interiorsaldoanterior
-                        + "|" + ipagado
-                        + "|" + isaldoinsoluto
-                        + "|" + "02"
-                        + "| \r\n"
-                        + if05
-                        + if06;
+
 
 
 
@@ -343,7 +412,7 @@ namespace CPTralix
 
 
 
-                System.IO.File.WriteAllText(@"C:\Administración\Sistema complemento pago\TxtGenerados\" + datestring + "-TralixTest.txt", f01);
+                System.IO.File.WriteAllText(@"C:\Administración\Sistema complemento pago\TxtGenerados\" + datestring + "-TralixTestPro.txt", f01);
                 //Console.WriteLine(f01);
             }
 
