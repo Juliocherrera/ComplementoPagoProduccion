@@ -23,7 +23,7 @@ namespace CPTralix
         , ivadeiva, ivaderet, retderet, conceptoretencion, consecutivoconcepto, claveproductoservicio, valorunitario, importe, descuento, cantidadletra, uuidrel
         , identificador, version, fechapago, monedacpag, tipodecambiocpag, monto, numerooperacion, rfcemisorcuenta, nombrebanco, numerocuentaord, rfcemisorcuentaben, numcuentaben
         , tipocadenapago, certpago, cadenadelpago, sellodelpago, identpag, identdocpago, seriecpag, foliocpag, monedacpagdoc, tipocambiocpag, metododepago, numerodeparcialidad,f03,f04, IdentificadorDelDocumentoPagado, identificaciondpago, serieinvoice, folioscpag, monedascpadgoc, nparcialidades,interiorsaldoanterior,ipagadoisaldoinsoluto, ipagado, isaldoinsoluto,k1,k3,f05,iva,retencion
-        , importeSaldoAnterior, importepago, importesaldoinsoluto, total, subt, ivat, rett, cond, tipoc, seriee, folioe, sfolio, idcomprobante, fecha, tmoneda, Tdoc, IdCliente, RFC, Cliente, Pais, Calle, NoExt, NoInt, Colonia, Localidad, Referencia, Municipio, Estado, CP, FechaPago, cantidad, descripcion, RFCbancoEmisor, BancoEmisor, CuentaPago,Total, identificadorDelPago, formadepagocpag,mmonto,if05,if06, iipagado, totaliva, totalisr, foliop, receptorp, MetdodoPagop, uidp;
+        , importeSaldoAnterior, importepago, importesaldoinsoluto, total, subt, ivat, rett, cond, tipoc, seriee, folioe, sfolio, idcomprobante, fecha, tmoneda, Tdoc, IdCliente, RFC, Cliente, Pais, Calle, NoExt, NoInt, Colonia, Localidad, Referencia, Municipio, Estado, CP, FechaPago, cantidad, descripcion, RFCbancoEmisor, BancoEmisor, CuentaPago,Total, identificadorDelPago, formadepagocpag,mmonto,if05,if06, iipagado, totaliva, totalisr, foliop, receptorp, MetdodoPagop, uidp,usdf04, TotaldeIva, TotaldeRe,f07,f08, Totalipagado;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,12 +46,14 @@ namespace CPTralix
         {
             //string folio = "40524";
             //string folio = "40658";
-            string folio = "40654";
+            //string folio = "40654";
             //string folio = "40647";
             //string folio = "40646";
             //string folio = "40645";
             //string folio = "40643";
             //string folio = "40525";
+            //string folio = "40627";
+            string folio = "40557";
             DataTable td = facLabControler.detalleFacturas(folio);
             string datestring = DateTime.Now.ToString("yyyyMMddHHmmss");
 
@@ -71,12 +73,17 @@ namespace CPTralix
                 cantidadletra = row["Totalconletra"].ToString();
                 formadepago = row["FormaDePago"].ToString();
                 cond = row["CondicionesdePago"].ToString();
-                metodopago33 = row["MetodoPago"].ToString();
+                metodopago33 = row["MedotoDePago"].ToString();
                 tmoneda = row["Moneda"].ToString();
                 tipoc = row["Tipodecambio"].ToString();
                 tipocomprobante = row["TipodeComprobante"].ToString();
                 lugarexpedicion = row["LugardeExpedición"].ToString();
+                
                 usocfdi = row["UsoCFDI"].ToString();
+                if (usocfdi == "P01")
+                {
+                    usocfdi = "CP01";
+                }
                 Tdoc = "FAC";
                 //confirmacion = row["Confirmación"].ToString();
                 //string f01 = "|01|" + idcomprobante + "|";
@@ -144,6 +151,9 @@ namespace CPTralix
                 DataTable detalleIdent = facLabControler.getDatosCPAGDOC(identificadorDelPago);
                 string uid = "";
                 decimal importePagos = 0;
+                decimal importePagos2 = 0;
+                decimal importePagos3 = 0;
+                decimal importePagos4 = 0;
                 double ivaa = 0.16;
                 double isrr = 0.04;
                 decimal totalIva = 0;
@@ -351,10 +361,34 @@ namespace CPTralix
                         ipagado = rowIdent["ImportePagado"].ToString();
                         isaldoinsoluto = rowIdent["ImporteSaldoInsoluto"].ToString();
 
+                        try
+                        {
+                            importePagos4 = importePagos4 + Convert.ToDecimal(ipagado);
+                            Totalipagado = importePagos4.ToString();
+                        }
+                        catch (Exception ex)
+                        {
+                            string errors = ex.Message;
+                        }
+
                         //aqui comienza el IF
                         if (monedascpadgoc.Trim() == "USD")
                         {
-                            f04 += "CPAG20DOC"
+                            usdf04 = "04"                                                   //1-Tipo De Registro
+                           + "|" + consecutivoconcepto.Trim()                       //2-Id Receptor
+                           + "|" + claveproductoservicio.Trim()                                //3-RFC
+                           + "|"                          //4-Nombre
+                           + "|" + cantidad.Trim()                           //5-Pais
+                           + "|" + claveunidad.Trim()                            //6-Calle
+                           + "|"                             //7-Numero Exterior
+                           + "|" + descripcion.Trim()                            //8-Numero Interior
+                           + "|" + valorunitario.Trim()                         //9-Colonia
+                           + "|" + importe.Trim()                        //10-Localidad
+                           + "|"                        //11-Referencia
+                           + "|"                         //12-Municio/Delegacion
+                           + "|" + "01"                          //13-EStado
+                           + "| \r\n";
+                           f04 += "CPAG20DOC"
                              + "|" + identificaciondpago
                              + "|" + uid
                              + "|" + serieinvoice
@@ -367,6 +401,8 @@ namespace CPTralix
                              + "|" + ipagado
                              + "|" + "0"
                              + "| \r\n";
+                            f07 = "";
+                            f08 = "";
 
 
                             //    cpagdoc = cpagdoc + ("CPAGDOC"                           //1-Tipo De Registro
@@ -437,6 +473,43 @@ namespace CPTralix
                                         + "|" + ipagado.Trim()
                                         + "| \r\n";
                                     }
+                                    try
+                                    {
+                                        importePagos2 = importePagos2 + Convert.ToDecimal(totaliva);
+                                        TotaldeIva = importePagos2.ToString();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        string errors = ex.Message;
+                                    }
+
+                                    f07 = "CPAG20IMPRET"
+                                    + "|" + identificaciondpago
+                                    + "|" + "002"
+                                    + "|" + TotaldeIva
+                                    + "| \r\n";
+
+                                    try
+                                    {
+                                        importePagos3 = importePagos3 + Convert.ToDecimal(totalisr);
+                                        TotaldeRe = importePagos3.ToString();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        string errors = ex.Message;
+                                    }
+
+                                    f08 = "CPAG20IMPTRA"
+                                    + "|" + identificaciondpago
+                                    + "|" + "002"
+                                    + "|" + "Tasa"
+                                    + "|" + "0.040000"
+                                    + "|" + TotaldeRe
+                                    + "|" + Totalipagado
+                                    + "| \r\n";
+
+
+
 
                                     //if05 = "CPAG20DOCIMPRET"
                                     //    + "|" + k1.Trim()
@@ -452,6 +525,20 @@ namespace CPTralix
 
                                 }
                             }
+                                usdf04 = "04"                                                   //1-Tipo De Registro
+                               + "|" + consecutivoconcepto.Trim()                       //2-Id Receptor
+                               + "|" + claveproductoservicio.Trim()                                //3-RFC
+                               + "|"                          //4-Nombre
+                               + "|" + cantidad.Trim()                           //5-Pais
+                               + "|" + claveunidad.Trim()                            //6-Calle
+                               + "|"                             //7-Numero Exterior
+                               + "|" + descripcion.Trim()                            //8-Numero Interior
+                               + "|" + valorunitario.Trim()                         //9-Colonia
+                               + "|" + importe.Trim()                        //10-Localidad
+                               + "|"                        //11-Referencia
+                               + "|"                         //12-Municio/Delegacion
+                               + "|" + "02"                          //13-EStado
+                               + "| \r\n";
                             f04 += "CPAG20DOC"
                                  + "|" + identificaciondpago
                                  + "|" + IdentificadorDelDocumentoPagado
@@ -467,6 +554,7 @@ namespace CPTralix
                                  + "| \r\n"
                                  + if05
                                  + if06;
+                                 
                         }
                         // Hasta aqui va en el ELSE
 
@@ -526,7 +614,14 @@ namespace CPTralix
                         //          + "| \r\n");
                     }
                 }
-                
+                if (contadorPPD == 0 && contadorPUE > 0)
+                {
+                    string msg = "La factura es PUE!! y es libre de todo PPD";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "swal", "swal('" + msg + "', 'La factura es PUE!! y es libre de todo PPD', 'success');", true);
+                    //PopupMsg.Message1 = "La factura es PUE!! y es libre de todo PPD";
+                    //PopupMsg.ShowPopUp(0);
+                }
+
                 DataTable detalleIdent2 = facLabControler.detalleFacturas(folio);
 
                 foreach (DataRow rowIdent2 in detalleIdent2.Rows)
@@ -604,21 +699,22 @@ namespace CPTralix
                    + "|"
                    + "|" + "601"    //17-Correo de envio                                                    
                    + "| \r\n"
-                //04-------------------------------------------------------------------------------------------------------------------------
-                + "04"                                                   //1-Tipo De Registro
-                   + "|" + consecutivoconcepto.Trim()                       //2-Id Receptor
-                   + "|" + claveproductoservicio.Trim()                                //3-RFC
-                   + "|"                          //4-Nombre
-                   + "|" + cantidad.Trim()                           //5-Pais
-                   + "|" + claveunidad.Trim()                            //6-Calle
-                   + "|"                             //7-Numero Exterior
-                   + "|" + descripcion.Trim()                            //8-Numero Interior
-                   + "|" + valorunitario.Trim()                         //9-Colonia
-                   + "|" + importe.Trim()                        //10-Localidad
-                   + "|"                        //11-Referencia
-                   + "|"                         //12-Municio/Delegacion
-                   + "|" + "02"                          //13-EStado
-                   + "| \r\n"
+                   + usdf04
+                   //04-------------------------------------------------------------------------------------------------------------------------
+                   //+ "04"                                                   //1-Tipo De Registro
+                   //   + "|" + consecutivoconcepto.Trim()                       //2-Id Receptor
+                   //   + "|" + claveproductoservicio.Trim()                                //3-RFC
+                   //   + "|"                          //4-Nombre
+                   //   + "|" + cantidad.Trim()                           //5-Pais
+                   //   + "|" + claveunidad.Trim()                            //6-Calle
+                   //   + "|"                             //7-Numero Exterior
+                   //   + "|" + descripcion.Trim()                            //8-Numero Interior
+                   //   + "|" + valorunitario.Trim()                         //9-Colonia
+                   //   + "|" + importe.Trim()                        //10-Localidad
+                   //   + "|"                        //11-Referencia
+                   //   + "|"                         //12-Municio/Delegacion
+                   //   + "|" + "02"                          //13-EStado
+                   //   + "| \r\n"
                    //CPAG20-------------------------------------------------------------------------------------------------------------------------
                    + "CPAG20"
                    + "|" + "2.0"                                  //2-Identificador
@@ -638,7 +734,9 @@ namespace CPTralix
                    + "|" + Total                       //12-MontoTotalPagos
                    + "| \r\n"
                    + f03
-                   + f04;
+                   + f04
+                   + f07
+                   + f08;
 
                 //CPAG20DOC-------------------------------------------------------------------------------------------------------------------------
 

@@ -31,6 +31,10 @@ namespace CPTralix.Controllers
         {
             return this.modelFact.getDatosMaster(identificador);
         }
+        public DataTable facturasEnviadas()
+        {
+            return this.modelFact.getFacturasEnviadas();
+        }
         // GET: FacCp
         public ActionResult Index()
         {

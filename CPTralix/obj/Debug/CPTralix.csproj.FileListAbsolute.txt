@@ -203,3 +203,6 @@ C:\Users\Lenovo\source\repos\CPTralixProduccion\CPTralix\obj\Debug\CPTralix.cspr
 C:\Users\Lenovo\source\repos\CPTralixProduccion\CPTralix\obj\Debug\CPTralix.csproj.CopyComplete
 C:\Users\Lenovo\source\repos\CPTralixProduccion\CPTralix\obj\Debug\CPTralix.dll
 C:\Users\Lenovo\source\repos\CPTralixProduccion\CPTralix\obj\Debug\CPTralix.pdb
+C:\Users\Lenovo\source\repos\CPTralixProduccion\CPTralix\bin\RestSharp.dll
+C:\Users\Lenovo\source\repos\CPTralixProduccion\CPTralix\bin\RestSharp.Serializers.Newtonsoft.Json.dll
+C:\Users\Lenovo\source\repos\CPTralixProduccion\CPTralix\bin\RestSharp.xml

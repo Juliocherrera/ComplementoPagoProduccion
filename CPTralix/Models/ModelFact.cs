@@ -180,5 +180,31 @@ namespace CPTralix.Models
             }
             return dataTable;
         }
+        public DataTable getFacturasEnviadas()
+        {
+            DataTable dataTable = new DataTable();
+            string cadena = @"Data source=172.24.16.113; Initial Catalog=TDR; User ID=sa; Password=tdr9312;Trusted_Connection=false;MultipleActiveResultSets=true";
+            using (SqlConnection connection = new SqlConnection(cadena))
+            {
+                using (SqlCommand selectCommand = new SqlCommand("select TOP 20 CONVERT(INT, folio) as Folio, FechaHoraEmision as Fecha, Nombre as Cliente from vista_fe_copago_Enviados order by CONVERT(INT, folio) DESC", connection))
+                {
+                    selectCommand.CommandType = CommandType.Text;
+                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(selectCommand))
+                    {
+                        try
+                        {
+                            selectCommand.Connection.Open();
+                            sqlDataAdapter.Fill(dataTable);
+                        }
+                        catch (SqlException ex)
+                        {
+                            string message = ex.Message;
+                        }
+                    }
+                }
+            }
+            return dataTable;
+        }
+
     }
 }
