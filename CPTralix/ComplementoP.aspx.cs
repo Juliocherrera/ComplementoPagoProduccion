@@ -23,7 +23,7 @@ namespace CPTralix
         , ivadeiva, ivaderet, retderet, conceptoretencion, consecutivoconcepto, claveproductoservicio, valorunitario, importe, descuento, cantidadletra, uuidrel
         , identificador, version, fechapago, monedacpag, tipodecambiocpag, monto, numerooperacion, rfcemisorcuenta, nombrebanco, numerocuentaord, rfcemisorcuentaben, numcuentaben
         , tipocadenapago, certpago, cadenadelpago, sellodelpago, identpag, identdocpago, seriecpag, foliocpag, monedacpagdoc, tipocambiocpag, metododepago, numerodeparcialidad,f03,f04, IdentificadorDelDocumentoPagado, identificaciondpago, serieinvoice, folioscpag, monedascpadgoc, nparcialidades,interiorsaldoanterior,ipagadoisaldoinsoluto, ipagado, isaldoinsoluto,k1,k3,f05,iva,retencion
-        , importeSaldoAnterior, importepago, importesaldoinsoluto, total, subt, ivat, rett, cond, tipoc, seriee, folioe, sfolio, idcomprobante, fecha, tmoneda, Tdoc, IdCliente, RFC, Cliente, Pais, Calle, NoExt, NoInt, Colonia, Localidad, Referencia, Municipio, Estado, CP, FechaPago, cantidad, descripcion, RFCbancoEmisor, BancoEmisor, CuentaPago,Total, identificadorDelPago, formadepagocpag,mmonto,if05,if06, iipagado, totaliva, totalisr, foliop, receptorp, MetdodoPagop, uidp,usdf04, TotaldeIva, TotaldeRe,f07,f08, Totalipagado;
+        , importeSaldoAnterior, importepago, importesaldoinsoluto, total, subt, ivat, rett, cond, tipoc, seriee, folioe, sfolio, idcomprobante, fecha, tmoneda, Tdoc, IdCliente, RFC, Cliente, Pais, Calle, NoExt, NoInt, Colonia, Localidad, Referencia, Municipio, Estado, CP, FechaPago, cantidad, descripcion, RFCbancoEmisor, BancoEmisor, CuentaPago,Total, identificadorDelPago, formadepagocpag,mmonto,if05,if06, iipagado, totaliva, totalisr, foliop, receptorp, MetdodoPagop, uidp,usdf04, TotaldeIva, TotaldeRe,f07,f08, Totalipagado,basecalculado;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,13 +47,13 @@ namespace CPTralix
             //string folio = "40524";
             //string folio = "40658";
             //string folio = "40654";
-            //string folio = "40647";
+            string folio = "40647";
             //string folio = "40646";
             //string folio = "40645";
             //string folio = "40643";
             //string folio = "40525";
             //string folio = "40627";
-            string folio = "40557";
+            //string folio = "40557";
             DataTable td = facLabControler.detalleFacturas(folio);
             string datestring = DateTime.Now.ToString("yyyyMMddHHmmss");
 
@@ -158,6 +158,7 @@ namespace CPTralix
                 double isrr = 0.04;
                 decimal totalIva = 0;
                 decimal totalIsr = 0;
+                decimal basecalculo = 0;
                 int contadorPUE = 0;
                 int contadorPPD = 0;
                 string MetdodoPago = row["MedotoDePago"].ToString();
@@ -439,10 +440,12 @@ namespace CPTralix
                                     k3 = rowIdentt["K3"].ToString();
                                     iva = rowIdentt["IVA"].ToString();
                                     retencion = rowIdentt["RETENCION"].ToString();
-                                    iipagado = rowIdentt["ActualApplyToAmount"].ToString();
-                                    totalIva = (decimal)(ivaa * Convert.ToDouble(iipagado));
+                                    iipagado = rowIdentt["SLSAMNT"].ToString();
+                                    basecalculo = Convert.ToDecimal(iipagado);
+                                    basecalculado = basecalculo.ToString("F");
+                                    totalIva = (decimal)(ivaa * Convert.ToDouble(basecalculado));
                                     totaliva = totalIva.ToString("F");
-                                    totalIsr = (decimal)(isrr * Convert.ToDouble(iipagado));
+                                    totalIsr = (decimal)(isrr * Convert.ToDouble(basecalculado));
                                     totalisr = totalIsr.ToString("F");
 
                                     if (iva != "")
@@ -456,7 +459,7 @@ namespace CPTralix
                                         + "|" + "0.160000"
                                         + "|" + totaliva
                                         //+ "|" + iva.Trim()
-                                        + "|" + ipagado.Trim()
+                                        + "|" + basecalculado.Trim()
                                         + "| \r\n";
                                     }
                                     if (retencion != "")
@@ -470,7 +473,7 @@ namespace CPTralix
                                         + "|" + "0.040000"
                                         + "|" + totalisr
                                         //+ "|" + retencion
-                                        + "|" + ipagado.Trim()
+                                        + "|" + basecalculado.Trim()
                                         + "| \r\n";
                                     }
                                     try
