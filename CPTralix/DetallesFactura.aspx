@@ -119,12 +119,106 @@
                                 <asp:Image ID="imgCP" runat="server" ImageUrl="~/img/alerta.png" Visible="False" /></th>
                         </tr>
       <tr>
-                            <th colspan="2" style="text-align:right" scope="row">
+                            <th scope="row">
                                 <asp:Label ID="Label13" runat="server" Text="RFC"></asp:Label></th>
-                            <th colspan="2">
+                            <th>
                                 <asp:TextBox ID="txtRFC" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox></th>
+                             <th scope="row">
+                                <asp:Label ID="Label17" runat="server" Text="Concepto"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="txtConcepto" runat="server" CssClass="form-control readOnlyTextBox" Height="68px"
+                                    ReadOnly="True" TextMode="MultiLine" ></asp:TextBox></th>
                             
                         </tr>
+      <tr>
+                            
+                            <th scope="row">
+                                <asp:Label ID="Label1" runat="server" Text="Tipo de Cobro"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control readOnlyTextBox"></asp:TextBox></th>
+          <th scope="row">
+                                <asp:Label ID="Label18" runat="server" Text="Tipo de Cobro"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="txtTipoCobro" runat="server" CssClass="form-control readOnlyTextBox"></asp:TextBox></th>
+                        </tr>
+      <tr>
+                            <th scope="row">
+                                <asp:Label ID="Label112" runat="server" Text="Pagado"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="txtTotal" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox>
+                            </th>
+                             <th scope="row">
+                                <asp:Label ID="Label332" runat="server" Text="Fecha Pago"></asp:Label> </th>
+                            <th>
+                                <asp:TextBox ID="txtFechaPago" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox>
+                                </th>
+                        </tr>
+      <tr>
+                            <th scope="row">
+                                <asp:Label ID="Label25" runat="server" Text="Cuenta Pago"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="txtCuentaPago" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox></th>
+                            <th scope="row">
+                                <asp:Label ID="Label26" runat="server" Text="Forma Pago"></asp:Label></th>
+                            <th >
+                                <asp:TextBox ID="txtFormaPago" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"
+                                    ></asp:TextBox></th>
+                        </tr>
+      <tr>
+                            <th scope="row">
+                                <asp:Label ID="Label772" runat="server" Text="Banco Emisor"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="txtBancoEmisor" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox>
+                            </th>
+                            <th scope="row">
+                                <asp:Label ID="Label28" runat="server" Text="Moneda"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="txtMoneda" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox></th>
+                        </tr>
+      <tr>
+                            <th scope="row">
+                                <asp:Label ID="Label299" runat="server" Text="RFC Banco Emisor"></asp:Label></th>
+                            <th >
+                                <asp:TextBox ID="txtRFCbancoEmisor" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox>
+                            </th>
+                            <th scope="row">
+                                <asp:Label ID="Label30" runat="server" Text="Unidad de Medida"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="txtUnidadMedida" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <asp:Label ID="Label33" runat="server" Text="Método Pago"></asp:Label>
+                            </th>
+                            <th >
+                                <asp:TextBox ID="txtMetodoPago" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox>
+                            </th>
+                            <th scope="row">
+                                <asp:Label ID="Label32" runat="server" Text="Cantidad"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox></th>
+                        </tr>
+      <tr>
+                            <th scope="row">
+                                <asp:Label ID="Label31" runat="server" Text="Id Concepto SAT"></asp:Label>
+                            </th>
+                            <th >
+                                <asp:TextBox ID="txtIdConcepto" runat="server" CssClass="form-control readOnlyTextBox" ReadOnly="True"></asp:TextBox>
+                            </th>
+                            <th scope="row">
+                                <asp:Label ID="Label2232" runat="server" Text="UUID de facturas pagadas"></asp:Label></th>
+                            <th>
+                                <asp:TextBox ID="txtFechaIniOP" runat="server" style="min-width: 100%" CssClass="form-control readOnlyTextBox" ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+                            </th>
+                        </tr>
+      <tr>
+                            <th colspan="4" scope="row">
+                                <asp:Label ID="Label2" runat="server" Text="Relación folio UUID"></asp:Label>
+                                <asp:TextBox ID="FolioUUIDTxt" runat="server" style="min-width: 100%; min-height: 100px" CssClass="form-control readOnlyTextBox input-lg" ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+
+                            </th>
+                            </tr>
+      
       <tr>
                             <th align="right">
                                 </th>
@@ -147,122 +241,15 @@
     <table class="table">
                          <tbody>
                         
+                       
                         
                         
                         
                         
-                        
-                        <tr>
-                            <td align="right" style="width: 443px">
-                                <asp:Label ID="Label17" runat="server" Text="Concepto"></asp:Label></td>
-                            <td style="width: 221px">
-                                <asp:TextBox ID="txtConcepto" runat="server" CssClass="readOnlyTextBox" Height="68px"
-                                    ReadOnly="True" TextMode="MultiLine" Width="198px"></asp:TextBox></td>
-                            <td align="right" style="width: 93px">
-                                <asp:Label ID="Label18" runat="server" Text="Tipo de Cobro"></asp:Label></td>
-                            <td align="left" style="width: 309px">
-                                <asp:TextBox ID="txtTipoCobro" runat="server" CssClass="readOnlyTextBox"></asp:TextBox></td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 443px">
-                                Pagado</td>
-                            <td align="left" style="width: 221px">
-                                <asp:TextBox ID="txtTotal" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox>
-                            </td>
-                            <td align="right" style="width: 93px">
-                                &nbsp;</td>
-                            <td align="left" style="width: 309px">
-                                &nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 443px">
-                                &nbsp;</td>
-                            <td align="left" style="width: 221px">
-                                &nbsp;</td>
-                            <td align="right" style="width: 93px">
-                                &nbsp;</td>
-                            <td align="left" style="width: 309px">
-                                &nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 443px; height: 22px;">
-                                Fecha Pago </td>
-                            <td align="left" style="width: 221px; height: 22px;">
-                                <asp:TextBox ID="txtFechaPago" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox>
-                                </td>
-                            <td align="right" style="width: 93px; height: 22px;">
-                                </td>
-                            <td align="left" style="width: 309px; height: 22px;">
-                                </td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 443px">
-                                <asp:Label ID="Label25" runat="server" Text="Cuenta Pago"></asp:Label></td>
-                            <td align="left" style="width: 221px">
-                                <asp:TextBox ID="txtCuentaPago" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox></td>
-                            <td align="right" style="width: 93px">
-                                <asp:Label ID="Label26" runat="server" Text="Forma Pago"></asp:Label></td>
-                            <td align="left" style="width: 309px">
-                                <asp:TextBox ID="txtFormaPago" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"
-                                    Width="300px"></asp:TextBox></td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 443px">
-                                Banco Emisor</td>
-                            <td align="left" style="width: 221px">
-                                <asp:TextBox ID="txtBancoEmisor" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox>
-                            </td>
-                            <td align="right" style="width: 93px">
-                                <asp:Label ID="Label28" runat="server" Text="Moneda"></asp:Label></td>
-                            <td align="left" style="width: 309px">
-                                <asp:TextBox ID="txtMoneda" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox></td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 443px">
-                                RFC Banco Emisor</td>
-                            <td align="left" style="width: 221px">
-                                <asp:TextBox ID="txtRFCbancoEmisor" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox>
-                            </td>
-                            <td align="right" style="width: 93px">
-                                <asp:Label ID="Label30" runat="server" Text="Unidad de Medida"></asp:Label></td>
-                            <td align="left" style="width: 309px">
-                                <asp:TextBox ID="txtUnidadMedida" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox></td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 443px; height: 40px;">
-                                <asp:Label ID="Label33" runat="server" Text="Método Pago"></asp:Label>
-                            </td>
-                            <td align="left" style="width: 221px; height: 40px;">
-                                <asp:TextBox ID="txtMetodoPago" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox>
-                            </td>
-                            <td align="right" style="width: 93px; height: 40px;">
-                                <asp:Label ID="Label32" runat="server" Text="Cantidad"></asp:Label></td>
-                            <td align="left" style="width: 309px; height: 40px;">
-                                <asp:TextBox ID="txtCantidad" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox></td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="width: 443px; height: 123px;">
-                                <asp:Label ID="Label31" runat="server" Text="Id Concepto SAT"></asp:Label>
-                            </td>
-                            <td align="left" style="width: 221px; height: 123px;">
-                                <asp:TextBox ID="txtIdConcepto" runat="server" CssClass="readOnlyTextBox" ReadOnly="True"></asp:TextBox>
-                            </td>
-                            <td align="right" style="width: 93px; height: 123px;">
-                                UUID de facturas pagadas</td>
-                            <td align="left" style="width: 309px; height: 123px;">
-                                <asp:TextBox ID="txtFechaIniOP" runat="server" CssClass="readOnlyTextBox" ReadOnly="True" Width="298px" Height="68px" TextMode="MultiLine"></asp:TextBox>
-                            </td>
-                        </tr>
                              </tbody> 
                     </table>
                       <table style="width: 700px; height: 154px">
-                        <tr>
-                            <td align="left" style="width: 443px; height: 258px;" id="FolioUUID">
-                                Relación folio UUID
-<asp:TextBox ID="FolioUUIDTxt" runat="server" ReadOnly="True" Width="679px" Height="224px" TextMode="MultiLine"></asp:TextBox>
-
-                            </td>
-                            </tr>
+                        
                           </table>
   </div>
  

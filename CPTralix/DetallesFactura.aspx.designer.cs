@@ -384,42 +384,6 @@ namespace CPTralix
         protected global::System.Web.UI.WebControls.TextBox txtRFC;
 
         /// <summary>
-        /// Control txtFechaDesde.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaDesde;
-
-        /// <summary>
-        /// Control imgFDesde.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgFDesde;
-
-        /// <summary>
-        /// Control txtFechaHasta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaHasta;
-
-        /// <summary>
-        /// Control imgFHasta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgFHasta;
-
-        /// <summary>
         /// Control Label17.
         /// </summary>
         /// <remarks>
@@ -436,6 +400,24 @@ namespace CPTralix
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConcepto;
+
+        /// <summary>
+        /// Control Label1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
+        /// Control TextBox1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
 
         /// <summary>
         /// Control Label18.
@@ -456,6 +438,15 @@ namespace CPTralix
         protected global::System.Web.UI.WebControls.TextBox txtTipoCobro;
 
         /// <summary>
+        /// Control Label112.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label112;
+
+        /// <summary>
         /// Control txtTotal.
         /// </summary>
         /// <remarks>
@@ -463,6 +454,15 @@ namespace CPTralix
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTotal;
+
+        /// <summary>
+        /// Control Label332.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label332;
 
         /// <summary>
         /// Control txtFechaPago.
@@ -510,6 +510,15 @@ namespace CPTralix
         protected global::System.Web.UI.WebControls.TextBox txtFormaPago;
 
         /// <summary>
+        /// Control Label772.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label772;
+
+        /// <summary>
         /// Control txtBancoEmisor.
         /// </summary>
         /// <remarks>
@@ -535,6 +544,15 @@ namespace CPTralix
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMoneda;
+
+        /// <summary>
+        /// Control Label299.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label299;
 
         /// <summary>
         /// Control txtRFCbancoEmisor.
@@ -618,6 +636,15 @@ namespace CPTralix
         protected global::System.Web.UI.WebControls.TextBox txtIdConcepto;
 
         /// <summary>
+        /// Control Label2232.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2232;
+
+        /// <summary>
         /// Control txtFechaIniOP.
         /// </summary>
         /// <remarks>
@@ -627,6 +654,15 @@ namespace CPTralix
         protected global::System.Web.UI.WebControls.TextBox txtFechaIniOP;
 
         /// <summary>
+        /// Control Label2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
         /// Control FolioUUIDTxt.
         /// </summary>
         /// <remarks>
@@ -634,6 +670,42 @@ namespace CPTralix
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FolioUUIDTxt;
+
+        /// <summary>
+        /// Control txtFechaDesde.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaDesde;
+
+        /// <summary>
+        /// Control imgFDesde.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgFDesde;
+
+        /// <summary>
+        /// Control txtFechaHasta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaHasta;
+
+        /// <summary>
+        /// Control imgFHasta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgFHasta;
 
         /// <summary>
         /// Control btnEdit.

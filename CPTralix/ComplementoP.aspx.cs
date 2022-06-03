@@ -440,7 +440,7 @@ namespace CPTralix
                                     k3 = rowIdentt["K3"].ToString();
                                     iva = rowIdentt["IVA"].ToString();
                                     retencion = rowIdentt["RETENCION"].ToString();
-                                    iipagado = rowIdentt["SLSAMNT"].ToString();
+                                    iipagado = rowIdentt["ActualApplyToAmount"].ToString();
                                     basecalculo = Convert.ToDecimal(iipagado);
                                     basecalculado = basecalculo.ToString("F");
                                     totalIva = (decimal)(ivaa * Convert.ToDouble(basecalculado));
@@ -454,11 +454,11 @@ namespace CPTralix
                                         + "|" + k1.Trim()
                                         + "|" + k3.Trim()
                                         + "|" + IdentificadorDelDocumentoPagado.Trim()
-                                        + "|" + "002"
+                                        + "|" + "001"
                                         + "|" + "Tasa"
-                                        + "|" + "0.160000"
-                                        + "|" + totaliva
-                                        //+ "|" + iva.Trim()
+                                        + "|" + "0.040000"
+                                        + "|" + totalisr
+                                        //+ "|" + retencion
                                         + "|" + basecalculado.Trim()
                                         + "| \r\n";
                                     }
@@ -468,14 +468,31 @@ namespace CPTralix
                                         + "|" + k1.Trim()
                                         + "|" + k3.Trim()
                                         + "|" + IdentificadorDelDocumentoPagado.Trim()
-                                        + "|" + "001"
+                                        + "|" + "002"
                                         + "|" + "Tasa"
-                                        + "|" + "0.040000"
-                                        + "|" + totalisr
-                                        //+ "|" + retencion
+                                        + "|" + "0.160000"
+                                        + "|" + totaliva
+                                        //+ "|" + iva.Trim()
                                         + "|" + basecalculado.Trim()
                                         + "| \r\n";
                                     }
+                                    try
+                                    {
+                                        importePagos3 = importePagos3 + Convert.ToDecimal(totalisr);
+                                        TotaldeRe = importePagos3.ToString();
+                                        
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        string errors = ex.Message;
+                                    }
+
+                                    f07 = "CPAG20IMPRET"
+                                    + "|" + identificaciondpago
+                                    + "|" + "001"
+                                    + "|" + TotaldeRe
+                                    + "| \r\n";
+
                                     try
                                     {
                                         importePagos2 = importePagos2 + Convert.ToDecimal(totaliva);
@@ -486,28 +503,12 @@ namespace CPTralix
                                         string errors = ex.Message;
                                     }
 
-                                    f07 = "CPAG20IMPRET"
-                                    + "|" + identificaciondpago
-                                    + "|" + "002"
-                                    + "|" + TotaldeIva
-                                    + "| \r\n";
-
-                                    try
-                                    {
-                                        importePagos3 = importePagos3 + Convert.ToDecimal(totalisr);
-                                        TotaldeRe = importePagos3.ToString();
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        string errors = ex.Message;
-                                    }
-
                                     f08 = "CPAG20IMPTRA"
                                     + "|" + identificaciondpago
                                     + "|" + "002"
                                     + "|" + "Tasa"
-                                    + "|" + "0.040000"
-                                    + "|" + TotaldeRe
+                                    + "|" + "0.160000"
+                                    + "|" + TotaldeIva
                                     + "|" + Totalipagado
                                     + "| \r\n";
 
